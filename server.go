@@ -128,6 +128,19 @@ func (s *Server) Publish(id string, event *Event) {
 	}
 }
 
+// Boardcast sends a mesage to every client in all streams.
+// If the stream's buffer is full, it blocks until the message is sent out to
+// all subscribers (but not necessarily arrived the clients), or when the
+// stream is closed.
+func (s *Server) Boardcast(event *Event) {
+	for _, stream := range s.streams {
+		select {
+		case <-stream.quit:
+		case stream.event <- s.process(event):
+		}
+	}
+}
+
 // TryPublish is the same as Publish except that when the operation would cause
 // the call to be blocked, it simply drops the message and returns false.
 // Together with a small BufferSize, it can be useful when publishing the
