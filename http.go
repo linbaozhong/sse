@@ -32,7 +32,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Get the StreamID from the URL
 	streamID := values.Get(StreamKey)
 	if streamID == "" {
-		http.Error(w, "Please specify a stream!", http.StatusInternalServerError)
+		http.Error(w, "Please specify a stream!", http.StatusBadRequest)
 		return
 	}
 

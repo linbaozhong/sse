@@ -10,11 +10,13 @@ import (
 	"time"
 )
 
-// DefaultBufferSize size of the queue that holds the streams messages.
 const (
+	// DefaultBufferSize size of the queue that holds the streams messages.
 	DefaultBufferSize = 1024
-	StreamKey         = "stream"
-	LastEventIdKey    = "last_event_id"
+	// StreamKey is the key for the stream id in the query string.
+	StreamKey = "stream"
+	// LastEventIdKey is the key for the last event id in the query string.
+	LastEventIdKey = "last_event_id"
 )
 
 // Server Is our main struct
