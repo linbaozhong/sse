@@ -30,7 +30,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	values := r.URL.Query()
 	// Get the StreamID from the URL
-	streamID := values.Get("stream")
+	streamID := values.Get(StreamKey)
 	if streamID == "" {
 		http.Error(w, "Please specify a stream!", http.StatusInternalServerError)
 		return
@@ -48,7 +48,7 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	eventid := 0
-	if id := values.Get("last_event_id"); id != "" {
+	if id := values.Get(LastEventIdKey); id != "" {
 		var err error
 		eventid, err = strconv.Atoi(id)
 		if err != nil {

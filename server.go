@@ -11,7 +11,11 @@ import (
 )
 
 // DefaultBufferSize size of the queue that holds the streams messages.
-const DefaultBufferSize = 1024
+const (
+	DefaultBufferSize = 1024
+	StreamKey         = "stream"
+	LastEventIdKey    = "last_event_id"
+)
 
 // Server Is our main struct
 type Server struct {
