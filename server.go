@@ -69,7 +69,7 @@ func NewWithCallback(onSubscribe, onUnsubscribe func(streamID string, sub *Subsc
 }
 
 // Close shuts down the server, closes all of the streams and connections
-func (s *Server) Close() {
+func (s *Server) Close() error {
 	s.muStreams.Lock()
 	defer s.muStreams.Unlock()
 
@@ -77,6 +77,7 @@ func (s *Server) Close() {
 		s.streams[id].close()
 		delete(s.streams, id)
 	}
+	return nil
 }
 
 // CreateStream will create a new stream and register it
